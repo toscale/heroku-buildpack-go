@@ -395,7 +395,6 @@ case "${TOOL}" in
         step "Moving \$GOPATH/pkg to cache"
         find "${GOPATH}/pkg" | head -n10
         mv "${GOPATH}/pkg" "${cache}"
-        find "${cache}/pkg" | head -n10
     ;;
     glide)
         ensureGlide "${GlideVersion}"
