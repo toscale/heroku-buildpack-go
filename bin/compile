@@ -282,8 +282,9 @@ setupGOPATH() {
     mkdir -p "${src}"
     mv -t "${src}" "${t}"/*
 
-    echo $GOPATH >&2
-    find $GOPATH | head -n10 >&2
+    if [ -d "${cache}/pkg" ]; then
+        cp -a "${cache}/pkg" "${GOPATH}/pkg"
+    fi
 
     echo "GOPATH=${GOPATH}"
     echo "src=${src}"
@@ -426,6 +427,9 @@ case "${TOOL}" in
         rm -rf pkg
     ;;
 esac
+
+rm -rf "${cache}/pkg"
+cp -a "${GOPATH}/pkg" "${cache}/pkg"
 
 if [ -n "${src}" -a "${src}" != "${build}" -a -e "${src}/Procfile" ]; then
     mv -t "${build}" "${src}/Procfile"
