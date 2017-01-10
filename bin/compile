@@ -263,6 +263,8 @@ warnPackageSpecOverride() {
     fi
 }
 
+find "${build}" -type f -name '*.go' -ls
+
 # Sets up GOPATH (and posibly other GO* env vars) and returns the location of
 # the source code as $src. The output of this function is meant to be eval'd'
 setupGOPATH() {
