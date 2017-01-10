@@ -282,6 +282,9 @@ setupGOPATH() {
     mkdir -p "${src}"
     mv -t "${src}" "${t}"/*
 
+    echo $GOPATH >&2
+    find $GOPATH | head -n10 >&2
+
     echo "GOPATH=${GOPATH}"
     echo "src=${src}"
 }
