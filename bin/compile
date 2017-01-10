@@ -273,7 +273,7 @@ setupGOPATH() {
         mv -t ${t} ${build}/*
         GOPATH="${build}"
     else
-        cp -R ${build}/* ${t}
+        cp -aR ${build}/* ${t}
         GOPATH="${t}/.go"
         echo export GOBIN="${build}/bin"
     fi
