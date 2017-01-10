@@ -382,6 +382,8 @@ case "${TOOL}" in
         fi
         massagePkgSpecForVendor
 
+        find "${GOPATH}/src" -type f -name '*.go' -ls
+
         if [ -d "${cache}/pkg" ]; then
             step "Moving pkg from cache to \$GOPATH/pkg"
             find "${cache}/pkg" -type f -ls | head -n10
