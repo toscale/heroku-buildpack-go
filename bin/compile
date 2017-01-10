@@ -389,6 +389,8 @@ case "${TOOL}" in
             find "${GOPATH}/pkg" -type f -ls | head -n10
         fi
 
+        go list -json
+
         step "Running: go install -v ${FLAGS[@]} ${pkgs}"
         go install -x -v "${FLAGS[@]}" ${pkgs} 2>&1
 
