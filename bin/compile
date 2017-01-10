@@ -282,10 +282,6 @@ setupGOPATH() {
     mkdir -p "${src}"
     mv -t "${src}" "${t}"/*
 
-    if [ -d "${cache}/pkg" ]; then
-        cp -a "${cache}/pkg" "${GOPATH}/pkg"
-    fi
-
     echo "GOPATH=${GOPATH}"
     echo "src=${src}"
 }
@@ -386,8 +382,20 @@ case "${TOOL}" in
         fi
         massagePkgSpecForVendor
 
+        if [ -d "${cache}/pkg" ]; then
+            step "Moving pkg from cache to \$GOPATH/pkg"
+            find "${cache}/pkg" | head -n10
+            mv "${cache}/pkg" "${GOPATH}"
+            find "${GOPATH}/pkg" | head -n10
+        fi
+
         step "Running: go install -v ${FLAGS[@]} ${pkgs}"
         go install -v "${FLAGS[@]}" ${pkgs} 2>&1
+
+        step "Moving \$GOPATH/pkg to cache"
+        find "${GOPATH}/pkg" | head -n10
+        mv "${GOPATH}/pkg" "${cache}"
+        find "${cache}/pkg" | head -n10
     ;;
     glide)
         ensureGlide "${GlideVersion}"
