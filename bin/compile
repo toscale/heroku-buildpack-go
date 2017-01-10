@@ -435,9 +435,6 @@ case "${TOOL}" in
     ;;
 esac
 
-rm -rf "${cache}/pkg"
-cp -a "${GOPATH}/pkg" "${cache}/pkg"
-
 if [ -n "${src}" -a "${src}" != "${build}" -a -e "${src}/Procfile" ]; then
     mv -t "${build}" "${src}/Procfile"
 fi
